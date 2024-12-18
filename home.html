@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Self-Defence Academy</title>
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+  <header>
+    <h1>Self-Defence Academy</h1>
+    <nav>
+      <ul>
+        <li><a href="#" onclick="showSection('about')">About Us</a></li>
+        <li><a href="#" onclick="showSection('courses')">Fee Structure</a></li>
+        <li><a href="#" onclick="showSection('tournaments')">Tournaments</a></li>
+        <li><a href="#" onclick="showSection('coaches')">Coaches</a></li>
+        <li><a href="#" onclick="showSection('contact')">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="about" class="content">
+      <h2>About Us</h2>
+      <div class="image-gallery">
+        <img src="about.jpg" alt="Martial Arts Image 1" class="section-image" onclick="showCourseInfo('Shotokan Karate', 'Shotokan Karate focuses on striking techniques, powerful kicks, and traditional forms.')">
+        <img src="about1.jpg" alt="Martial Arts Image 2" class="section-image" onclick="showCourseInfo('Kung-Fu', 'Kung-Fu emphasizes fluid movements, self-discipline, and dynamic combat techniques.')">
+        <img src="about2.jpg" alt="Martial Arts Image 3" class="section-image" onclick="showCourseInfo('Karate', 'Karate is a form of self-defense that builds strength, discipline, and respect.')">
+        <img src="about3.jpg" alt="Martial Arts Image 4" class="section-image" onclick="showCourseInfo('Mixed Martial Arts', 'MMA combines techniques from various martial arts, focusing on versatile combat skills.')">
+        <img src="about4.jpg" alt="Martial Arts Image 5" class="section-image" onclick="showCourseInfo('Wrestling', 'Wrestling is a grappling-based sport focusing on throws, pins, and holds.')">
+      </div>
+      <p class="highlighted-text">
+        Welcome to Self-Defence Academy<br><br>
+        CHOOSE THE ABOVE TECHNIQUE AND BE A MASTER OF IT
+      </p>
+    </section>
+    
+    <!-- Modal for Course Info -->
+    <div id="courseModal" class="modal" style="display: none;" onclick="closeCourseInfo(event)">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <span class="close-button" onclick="closeCourseInfo()">&times;</span>
+        <h3 id="courseTitle"></h3>
+        <p id="courseDescription"></p>
+      </div>
+    </div>
+    
+    <style>
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+    
+      .modal-content {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        max-width: 400px;
+        width: 90%;
+        position: relative;
+      }
+    
+      .close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+        cursor: pointer;
+      }
+    
+      .close-button:hover {
+        color: red;
+      }
+    </style>
+    
+    <script>
+      function showCourseInfo(title, description) {
+        document.getElementById('courseTitle').innerText = title;
+        document.getElementById('courseDescription').innerText = description;
+        document.getElementById('courseModal').style.display = 'flex';
+      }
+    
+      function closeCourseInfo(event) {
+        const modal = document.getElementById('courseModal');
+        if (event.target === modal || event.type === 'click') {
+          modal.style.display = 'none';
+        }
+      }
+    </script>
+     <section id="chat-section" class="content">
+      <h2>Chat with Us</h2>
+      <p>Click below to chat with our bot!</p>
+    </section>
+    
+    <div id="chatbot-container" class="chatbot-container" style="display: none;">
+      <h3>Chat with Us</h3>
+      <div id="chatbot">
+        <div id="chat-output"></div>
+      </div>
+      <input type="text" id="chat-input" placeholder="Ask a question...">
+      <button onclick="handleChat()">Send</button>
+      <div class="faq-section">
+        <h4>Frequently Asked Questions:</h4>
+        <ul>
+          <li><a href="#" onclick="handleFAQ('What is Self-Defence Academy?')">What is Self-Defence Academy?</a></li>
+          <li><a href="#" onclick="handleFAQ('What courses are available?')">What courses are available?</a></li>
+          <li><a href="#" onclick="handleFAQ('Where are you located?')">Where are you located?</a></li>
+          <li><a href="#" onclick="handleFAQ('How can I register?')">How can I register?</a></li>
+          <li><a href="#" onclick="handleFAQ('What are the fees?')">What are the fees?</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <style>
+      .chatbot-container {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        max-width: 280px;
+        z-index: 1000;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+    
+      .chatbot-container h3 {
+        margin: 0 0 10px;
+        font-size: 16px;
+        text-align: center;
+      }
+    
+      #chatbot {
+        max-height: 150px;
+        overflow-y: auto;
+        padding: 5px;
+        border: 1px solid #ddd;
+        background-color: #f9f9f9;
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
+    
+      #chat-input {
+        width: calc(100% - 50px);
+        padding: 6px;
+        margin-right: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+    
+      button {
+        padding: 6px 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+    
+      button:hover {
+        background-color: #0056b3;
+      }
+    
+      .faq-section {
+        margin-top: 10px;
+      }
+    
+      .faq-section h4 {
+        margin-bottom: 5px;
+        font-size: 14px;
+      }
+    
+      .faq-section ul {
+        list-style-type: none;
+        padding: 0;
+        font-size: 13px;
+      }
+    
+      .faq-section ul li {
+        margin-bottom: 5px;
+      }
+    
+      .faq-section ul li a {
+        text-decoration: none;
+        color: #007bff;
+        cursor: pointer;
+      }
+    
+      .faq-section ul li a:hover {
+        text-decoration: underline;
+      }
+    </style>
+    
+    <script>
+      const chatbotResponses = {
+        "What is Self-Defence Academy?": "Self-Defence Academy is a professional martial arts institute that offers training in various self-defense techniques.",
+        "What courses are available?": "We offer courses in Shotokan, Karate, Kung-Fu, Mixed Martial Arts, and Wrestling.",
+        "Where are you located?": "We are located at #12 Dairy Cross, Yelahanka New Town, Bengaluru.",
+        "How can I register?": "You can register by contacting us through email or phone, or visiting our location directly.",
+        "What are the fees?": "The fees start at Rs 800/month for specific courses. Advance fees of Rs 2000 include uniform and kit."
+      };
+    
+      function handleChat() {
+        const input = document.getElementById("chat-input").value.trim();
+        const outputDiv = document.getElementById("chat-output");
+    
+        if (!input) return;
+    
+        const userMessage = `<div><strong>You:</strong> ${input}</div>`;
+        outputDiv.innerHTML += userMessage;
+    
+        const response = chatbotResponses[input] || "Sorry, I didn't understand that. Please ask another question.";
+        const botMessage = `<div><strong>Bot:</strong> ${response}</div>`;
+        outputDiv.innerHTML += botMessage;
+    
+        document.getElementById("chat-input").value = ""; 
+        outputDiv.scrollTop = outputDiv.scrollHeight; 
+      }
+    
+      function handleFAQ(question) {
+        const outputDiv = document.getElementById("chat-output");
+    
+        const userMessage = `<div><strong>You:</strong> ${question}</div>`;
+        outputDiv.innerHTML += userMessage;
+    
+        const response = chatbotResponses[question] || "Sorry, I didn't understand that. Please ask another question.";
+        const botMessage = `<div><strong>Bot:</strong> ${response}</div>`;
+        outputDiv.innerHTML += botMessage;
+    
+        outputDiv.scrollTop = outputDiv.scrollHeight; 
+      }
+      document.getElementById("chat-section").addEventListener("click", (event) => {
+        const chatbotContainer = document.getElementById("chatbot-container");
+        chatbotContainer.style.display =
+          chatbotContainer.style.display === "none" ? "block" : "none";
+      });
+      document.addEventListener("click", (event) => {
+        if (
+          !event.target.closest("#chat-section") &&
+          !event.target.closest("#chatbot-container")
+        ) {
+          document.getElementById("chatbot-container").style.display = "none";
+        }
+      });
+    </script>
+    
+      
+    <section id="courses" class="content" style="display: none; background-image: url('fees.jpg'); background-size: cover; background-position: center; color: white; padding: 25px 0; position: relative;">
+      <h2 style="text-align: center; font-size: 2.5rem;">Fees Structure<br>Advance Rs: 2000 (Including Uniform And Kit)</h2>
+      <img src="pay.jpg" alt="Scanner for Payment" style="position: absolute; top: 50%; left: 5%; width: 150px; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+      
+      <ul style="list-style-type: none; padding: 0; margin-top: 20px; font-size: 1.2rem; line-height: 1.8;">
+        <li>Shotokan: Rs: 800/month</li>
+        <li>Kung-Fu: Rs: 1200/month</li>
+        <li>Karate: Rs: 1000/month</li>
+        <li>Mixed Martial Arts: Rs: 800/month</li>
+        <li>Wrestling: Rs: 800/month</li>
+      </ul>
+    </section>
+    <section id="tournaments" class="content" style="display: none; background-image: url('back.jpg'); background-size: cover; background-position: center; color: white; padding: 75px 0; position: relative;">
+      <h2 style="text-align: center; font-size: 2.5rem; color: white;">Tournaments</h2>
+      
+      <img src="pay.jpg" alt="Payment Icon" style="position: absolute; top: 20%; right: 5%; width: 100px; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); z-index: 2;">
+      
+      <img src="event.jpg" alt="Tournament" class="section-image" style="max-width: 15%; height: auto; display: block; margin: 10px auto; z-index: 1;">
+      <br><br>
+      <p style="text-align: center; font-size: 1.2rem; line-height: 1.8; z-index: 1;">
+          <span style="color: white;">UPCOMING TOURNAMENT OF SHOTOKAN<br></span>
+          <ul style="color: white;">Shotokan National Championship 2025</ul>
+          Date 10-01-2025, Registration Fees: Rs: 1500(Per Event)
+      </p>
+      <br><br>
+      <p style="text-align: center; font-size: 1.2rem; line-height: 1.8; z-index: 1;">
+          <span style="color: white;">UPCOMING TOURNAMENT OF KARATE<br></span>
+          <ul style="color: white;">Karate State Championship 2025</ul>
+          Date 25-01-2025, Registration Fees: Rs: 500(Per Event)
+      </p>
+      <br><br>
+      <p style="text-align: center; font-size: 1.2rem; line-height: 1.8; z-index: 1;">
+          <span style="color: white;">UPCOMING TOURNAMENT OF WRESTLING<br></span>
+          <ul style="color: white;">Wrestling National Championship 2025</ul>
+          Date 01-12-2024, Registration Fees: Rs: 1500(Per Event)
+      </p>
+  </section>
+  <section id="coaches" class="content" style="display: none; background-image: url('sir.jpg'); background-size: cover; background-position: center; padding: 75px 0; color: white; position: relative;">
+    <h2 style="text-align: center; font-size: 2.5rem; color: white;">Our Coaches</h2>
+    <div class="coaches-container" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 20px; padding: 20px 0;">
+        <div class="coach" style="width: 300px; height: 400px; perspective: 1000px;">
+            <div class="coach-card" style="width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.6s ease; box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); border-radius: 8px;">
+                <div class="coach-front" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 8px;">
+                    <img src="c1.jpg" alt="Coach 1" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                    <p style="text-align: center; position: absolute; bottom: 10px; width: 75%; color: white; font-size: 1.2rem; background-color: rgba(0, 0, 0, 0.5); padding: 10px; border-radius: 0 0 8px 8px;">
+                        <strong>Sensei John Doe</strong> - 5th Dan Black Belt in Karate
+                    </p>
+                </div>
+                <div class="coach-back" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; transform: rotateY(180deg); background-color: rgba(0, 0, 0, 0.8); color: white; padding: 20px; border-radius: 8px;">
+                    <h3>Achievements:</h3>
+                    <ul>
+                        <li>20 years of teaching experience</li>
+                        <li>Multiple Karate Tournament Gold Medals</li>
+                        <li>Founder of Shotokan Karate School</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="coach" style="width: 300px; height: 400px; perspective: 1000px;">
+            <div class="coach-card" style="width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.6s ease; box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); border-radius: 8px;">
+                <div class="coach-front" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 8px;">
+                    <img src="c2.jpg" alt="Coach 2" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                    <p style="text-align: center; position: absolute; bottom: 10px; width: 75%; color: white; font-size: 1.2rem; background-color: rgba(0, 0, 0, 0.5); padding: 5px; border-radius: 0 0 4px 4px;">
+                        <strong>Master Aravind</strong> - Taekwondo Champion
+                    </p>
+                </div>
+                <div class="coach-back" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; transform: rotateY(180deg); background-color: rgba(0, 0, 0, 0.8); color: white; padding: 20px; border-radius: 8px;">
+                    <h3>Achievements:</h3>
+                    <ul>
+                        <li>15 years of professional coaching</li>
+                        <li>Taekwondo World Championship Gold Medalist</li>
+                        <li>Instructor at National Taekwondo Center</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="coach" style="width: 300px; height: 400px; perspective: 1000px;">
+            <div class="coach-card" style="width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.6s ease; box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); border-radius: 8px;">
+                <div class="coach-front" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 8px;">
+                    <img src="c3.jpg" alt="Coach 3" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                    <p style="text-align: center; position: absolute; bottom: 10px; width: 75%; color: white; font-size: 1.2rem; background-color: rgba(0, 0, 0, 0.5); padding: 10px; border-radius: 0 0 8px 8px;">
+                        <strong>Coach Mike Lee</strong> - Judo Expert
+                    </p>
+                </div>
+                <div class="coach-back" style="position: absolute; width: 100%; height: 100%; backface-visibility: hidden; transform: rotateY(180deg); background-color: rgba(0, 0, 0, 0.8); color: white; padding: 20px; border-radius: 8px;">
+                    <h3>Achievements:</h3>
+                    <ul>
+                        <li>International Judo Medalist</li>
+                        <li>10 years of coaching experience</li>
+                        <li>Coached multiple National Judo Champions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+  
+    </div>
+</section>
+<style>
+    .coach-card:hover {
+        transform: rotateY(180deg);
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.4);
+        transition: transform 1ms ease, box-shadow 0.8s ease;
+    }
+
+    .coach-front, .coach-back {
+        border-radius: 8px;
+    }
+
+    .coach-card {
+        transition: transform 0.6s ease, box-shadow 0.3s ease;
+    }
+</style>
+<section id="contact" class="contact" style="display: none; background-image: url('us.jpg'); background-size: cover; background-position: center; color: white; padding: 75px 0; position: relative;">
+  <div class="contact-container">
+      <h2 class="contact-heading"></h2>
+      <div class="contact-banner">
+          <img src="con.jpg" alt="Contact Us" class="contact-image">
+          <div class="contact-overlay">
+              <p class="contact-overlay-text">We're here to help you!</p>
+          </div>
+      </div>
+      <div class="contact-details">
+          <div class="contact-card">
+              <i class="fa fa-envelope contact-icon"></i>
+              <h3><u>Email</u></h3>
+              <p><a href="mailto:info@martialartsacademy.com">selfdefence2024@gmail.com</a></p>
+          </div>
+          <div class="contact-card">
+              <i class="fa fa-phone contact-icon"></i>
+              <h3><u>Phone</u></h3>
+              <p><a href="tel:1234567890">(+91 1234567891)</a></p>
+          </div>
+          <div class="contact-card">
+              <i class="fa fa-map-marker contact-icon"></i>
+              <h3><u>Location</u></h3>
+              <p>#12 Dairy Cross, Yelahanka New Town<br>Bengaluru</p>
+          </div>
+      </div>
+  </div>
+</section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Self-Defence Academy. All Rights Reserved.</p>
+  </footer>
+
+  <script src="home.js"></script>
+</body>
+</html>
+
